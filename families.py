@@ -1,6 +1,7 @@
 import math
 import os
 from item_stats import item_stats
+from throwables import throwables
 from colors import TerminalColors
 
 def center_text(text):
@@ -27,12 +28,12 @@ class Family():
   def init_inventory(self):
     self.inventory = {
       "mayo": 0,
-      "sugar": 0,
+      "sugar": 1,
       "sweetener": 0,
       "chips": 0,
-      "soda": 0,
+      "soda": 2,
       "polyester scraps": 0,
-      "youngla jeans": 0,
+      "youngla jeans": 1,
       "monacle": 0,
       "ruff": 0,
       "sigma shirt": 0,
@@ -54,14 +55,27 @@ class Family():
 
     for item, quantity in self.inventory.items():
       if quantity > 0:
+        inventory_str += f"    {item.capitalize()}: "
+
         if item in item_stats.keys():
           stat = item_stats[item][1]
-          inventory_str += f"    {item.capitalize()} = [{quantity}, +{item_stats[item][0]} {stat_to_color[stat]}],\n"
+          inventory_str += f"({TerminalColors.BOLD}Amount:{TerminalColors.RESET} {quantity}) | ({TerminalColors.BOLD}Stat:{TerminalColors.RESET} +{item_stats[item][0]} {stat_to_color[stat]}),\n"
+        elif item in throwables.keys():
+          stat = throwables[item]
+          inventory_str += f"({TerminalColors.BOLD}Amount:{TerminalColors.RESET} {quantity}) | ({TerminalColors.BOLD}Damage:{TerminalColors.RESET} {TerminalColors.RED}{stat}{TerminalColors.RESET}),\n"
         else:
-          inventory_str += f"    {item.capitalize()} = {quantity},\n"
+          inventory_str += f"({TerminalColors.BOLD}Amount:{TerminalColors.RESET} {quantity}),\n"
+
     inventory_str = inventory_str.rstrip(',\n') + "\n"
 
     return inventory_str
+
+  def give_xp(self, amount):
+    self.xp += amount
+    
+    while self.xp >= get_xp_for_level(self):
+      self.xp -= get_xp_for_level(self)
+      self.level += 1
 
   def get_xp_for_level(self):
     return 2 * self.level ** 2 + 50 * self.level + 48
