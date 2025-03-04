@@ -1,0 +1,25 @@
+#locations in the game, and their adjacent areas
+locations = {
+  "entrance": ["Basement", "Floor 1", "Floor 2"],
+  "basement": ["Boiler Room", "Wasser Room", "Marron Room", "Elevator 0", "Stuco", "Vending Machine", "Entrance"],
+  "floor 1": ["Schray Room", "Mezz 1", "Grab and Go", "Gym", "Knowco", "Entrance"],
+  "floor 2": ["Mezz 2", "Dimino Room", "Sokira Room", "Elevator 2", "Gross Room", "Entrance", "Wolf Room", "Davenport Room"],
+  "boiler room": ["Basement"],
+  "wasser room": ["Basement"],
+  "elevator 0": ["Basement"],
+  "vending machine": ["Basement"],
+  "marron room": ["Basement"],
+  "stuco": ["Basement"],
+  "schray room": ["Floor 1"],
+  "mezz 1": ["Floor 1"],
+  "knowco": ["Floor 1"],
+  "gym": ["Floor 1"],
+  "grab and go": ["Floor 1"],
+  "mezz 2": ["Floor 2"],
+  "dimino room": ["Floor 2"],
+  "sokira room": ["Floor 2"],
+  "elevator 2": ["Floor 2"],
+  "gross room": ["Floor 2"],
+  "davenport room": ["Floor 2"],
+  "wolf room": ["Floor 2"]
+}
